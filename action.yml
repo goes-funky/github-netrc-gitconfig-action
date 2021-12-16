@@ -1,0 +1,19 @@
+name: 'GitHub .netrc and .gitconfig'
+description: 'Sets up a .netrc and .gitconfig that uses a Personal Access Token over HTTPS to fetch repositories'
+inputs:
+  github-token:
+    description: 'GitHub Personal Access Token to set up for authentication with GitHub'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup .gitconfig and netrc
+      env:
+        GITHUB_TOKEN: "${{ inputs.github-token }}"
+      run: |
+        echo "machine github.com" > ~/.netrc
+        echo "  login ${GITHUB_TOKEN}" >> ~/.netrc
+        echo "  password x-oauth-basic" >> ~/.netrc
+        chmod 600 ~/.netrc
+        git config --global --add url."https://github.com/".insteadOf "ssh://git@github.com/"
+        git config --global --add url."https://github.com/".insteadOf "git@github.com:"
