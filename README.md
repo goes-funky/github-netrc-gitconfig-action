@@ -15,7 +15,7 @@ jobs:
       # ...
 
       - name: Setup .gitconfig and netrc
-        uses: goes-funky/github-netrc-gitconfig-action@master
+        uses: goes-funky/github-netrc-gitconfig-action@v1
         with:
           github-token: "${{ secrets.GH_REPO_READ_TOKEN }}"
 
