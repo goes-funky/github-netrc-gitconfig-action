@@ -8,6 +8,7 @@ runs:
   using: 'composite'
   steps:
     - name: Setup .gitconfig and netrc
+      shell: bash
       env:
         GITHUB_TOKEN: "${{ inputs.github-token }}"
       run: |
